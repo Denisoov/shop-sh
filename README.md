@@ -1,6 +1,6 @@
 # clothing-store
 
-## Build Setup
+## Порядок действий
 
 ```bash
 # Установка зависимостей
