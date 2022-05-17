@@ -3,6 +3,8 @@ const defaultState = {
       isShowSnackbar: false,
       message: null,
     },
+    isLoadingMainPage: false,
+    isLoadingCatalogPage: false
   }
   
   export const state = () => defaultState
@@ -14,6 +16,9 @@ const defaultState = {
     CLOSE_SNACKBAR(state) {
       state.snackbar.isShowSnackbar = false
     },
+    SET_LOADING(state, { typeLoading, status }) {
+      state[typeLoading] = status
+    }
   }
   
   export const actions = {}

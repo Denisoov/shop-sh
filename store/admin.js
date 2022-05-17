@@ -1,6 +1,12 @@
 const defaultState = {
     token: null,
     banners: [],
+    collections: [],
+    detailOfCollection: [],
+    remakeProduct: {
+      idProduct: null,
+      idCollection: null
+    }
   }
   
   export const state = () => defaultState
@@ -12,6 +18,16 @@ const defaultState = {
     SET_BANNERS(state, banners) {
       state.banners = banners;
     },
+    SET_COLLECTIONS(state, collections) {
+      state.collections = collections
+    },
+    SET_DETAIL_COLLECTION(state, collections) {
+      state.detailOfCollection = collections
+    },
+    SET_REMAKE_PRODUCT(state, product) {
+      state.remakeProduct.idProduct = product.id
+      state.remakeProduct.idCollection = product.group_id
+    }
   }
   
   export const actions = {
@@ -50,14 +66,7 @@ const defaultState = {
 
     async loadNewBanner({ dispatch }, image) {
       try {
-        const formData = new FormData();
-        formData.append('image', image)
-
-        await this.$api.post('banner/create', formData, {
-          headers: {
-            'Content-Type': 'blob'
-          } 
-        })
+        await this.$api.post('banner/create', image)
 
         dispatch('getAllBanners')
       } catch (error) {
@@ -73,7 +82,80 @@ const defaultState = {
         
       }
     },
+
+    async getAllCollection({ commit }) {
+      try {
+        
+        const { data } = await this.$api.get('group/show')
+
+        commit('SET_COLLECTIONS', data)
+
+      } catch (error) {
+        console.log(error)
+      }
+    },
+
+    async createNewCollection({ dispatch }, titleCollection) {
+      try {
+        await this.$api.post('group/create', titleCollection)
+
+        dispatch('getAllCollection')
+        
+      } catch (error) {
+        
+      }
+    },
+
+    async deleteCollections({ dispatch }, idCollection) {
+      try {
+        await this.$api.delete(`group/delete/${idCollection}`)
+  
+        dispatch('getAllCollection')
+      } catch (error) {
+        
+      }
+    },
+
+    async createNewProduct({ dispatch }, { formData, idCollection }) {
+      try {
+        await this.$api.post(`product/create/${idCollection}`, formData)
+  
+        dispatch('getProductsOfCollection', idCollection)
+      } catch (error) {
+        
+      }
+    },
+
+    async getProductsOfCollection({ commit }, idCollection) {
+      try {
+        
+        const { data } = await this.$api.get(`group/showDetail/${idCollection}`)
+
+        commit('SET_DETAIL_COLLECTION', data)
+
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async deleteProduct({ dispatch }, { idProduct, idCollection}) {
+      try {
+        await this.$api.delete(`product/delete/${idProduct}`)
+  
+        dispatch('getProductsOfCollection', idCollection)
+      } catch (error) {
+        
+      }
+    },
+
+    async addParamsProduct({ dispatch }, { idProduct, params }) {
+      try {
+        await this.$api.post(`/api/parameter/create/${product}}`, params)
+  
+      } catch (error) {
+        
+      }
+    },
+
   }
   
-  export const getters = {}
   

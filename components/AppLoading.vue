@@ -1,14 +1,13 @@
-<template lang="html">
+<template>
   <div class="loading-page" v-if="loading">
-     <div class="loading">
-     </div>
+     <div class="loading" />
   </div>
 </template>
 
 <script>
 export default {
   data: () => ({
-    loading: false,
+    loading: true,
   }),
   methods: {
     start() {
@@ -24,8 +23,7 @@ export default {
 <style scoped>
 .loading-page {
   width: 100%;
-  height: 100%;
-  background: #000;
+  height: 100vh;
 }
 .loading::before ,
 .loading::after {

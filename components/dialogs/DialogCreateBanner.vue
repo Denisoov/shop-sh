@@ -2,7 +2,6 @@
 import PictureInput from 'vue-picture-input'
 
 export default {
-  name: 'app',
   data: () => ({ image: null }),
   components: {
     PictureInput

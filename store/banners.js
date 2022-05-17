@@ -12,9 +12,20 @@ export const mutations = {
 
 export const actions = {
   async getAllBanners({ commit }) {
+    await commit(
+      'SET_LOADING', {
+        typeLoading: 'isLoadingMainPage',
+        status: true
+    }, { root: true })
     const { data } = await this.$api.get('banner/show')
 
-    commit('SET_BANNERS', data)
+    await commit('SET_BANNERS', data)
+
+    await commit(
+      'SET_LOADING', {
+        typeLoading: 'isLoadingMainPage',
+        status: false
+    }, { root: true })
   }
 };
 

@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <v-btn 
-      class="ml-4 mt-4"
+      class="ml-4 mt-4 mb-4"
       color="primary"
       @click="openDialogCreateBanner"
     >
@@ -28,12 +28,12 @@
             :key="banner.id"
           >
             <td>
-              {{ index }}
+              {{ index + 1 }}
             </td>
             <td>
               <img 
                 class="table-image" 
-                :src="banner.image"
+                :src="`data:image/png;base64, ${banner.image}`"
               >
             </td>
             <td>
@@ -72,12 +72,6 @@ export default {
       store.dispatch('admin/getAllBanners')
     }
     else redirect(`/admin`)
-    
-  },
-  async mounted() {
-    console.log(this.$store.state.admin.banners)
-    // const img = await this.blobToBase64(this.banners[0].image)
-    // console.log(img)
   },
   layout: 'adm',
   components: {
@@ -90,14 +84,6 @@ export default {
     }
   },
   methods: {
-    blobToBase64: (blob) => new Promise((resolve, reject) => {
-    const reader = new FileReader;
-    reader.onerror = reject;
-    reader.onload = () => {
-        resolve(reader.result);
-    };
-    reader.readAsDataURL(blob);
-    }),
     closeDialogCreateBanner() {
       this.isDialogCreateBanner = false
     },

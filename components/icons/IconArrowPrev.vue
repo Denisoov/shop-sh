@@ -29,6 +29,9 @@ export default {
 
 <style scoped>
   svg {
+    font-size: 30px !important;
+    height: 30px !important;
+    width: 30px !important;
     transform: rotate(180deg);
   }
 </style>

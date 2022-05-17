@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="header__body">
-      <div class="header__logotype">shop</div>
+        <span class="header__logotype">shop</span>
         <nav class="header__links">
           <nuxt-link 
             class="header__links-link" 
@@ -11,7 +11,7 @@
           <nuxt-link 
             class="header__links-link" 
             data-item='Каталог' 
-            to="/"
+            to="/catalog"
           >Каталог</nuxt-link>
           <nuxt-link 
             class="header__links-link" 
@@ -19,10 +19,6 @@
             data-item='Контакты' 
           >Контакты</nuxt-link>
         </nav>
-      <button class="header__basket">
-        <icon-basket :color="'#545B75'" />
-        <span class="header__basket-text">Корзина</span>
-      </button>
     </div>
   </header>
 </template>
@@ -40,7 +36,7 @@ export default {
 <style scoped lang="scss">
 .header {
   width: 100%;
-  border-bottom: 2px solid #dbe0ef;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
 
   &__body {
     width: 100%;
@@ -50,7 +46,7 @@ export default {
     justify-content: space-between;
     flex-wrap: wrap;
     padding: 20px 10px;
-    background: #F6F8FA;
+    background: #041A31;
   }
 
   &__links {
@@ -61,7 +57,7 @@ export default {
 
     a {
       display: inline-block;
-      padding-right: 90px;
+      margin-right: 90px;
       font-size: 18px;
       color: #545B75;
       text-decoration: none;
@@ -90,17 +86,18 @@ export default {
   }
 
   &__logotype {
-    font-size: 34px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    margin-left: 30px;
+    font-size: 28px;
+    font-family:'Montserrat-Bold', 'sans-serif';
     color: #545B75;
   }
 
   &__basket {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #545B75;
-  font-family: 'Montserrat-SemiBold', 'sans-serif';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #545B75;
+    font-family: 'Montserrat-SemiBold', 'sans-serif';
 
   &-text {
     font-size: 18px;

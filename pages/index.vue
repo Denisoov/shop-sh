@@ -1,65 +1,40 @@
 <template>
   <div class="page">
-    <section v-if="banners" class="banner">
-      <v-carousel 
-        hide-delimiters 
-        :interval="3000"
-        v-model="model"
-        show-arrows-on-hover
-      >
-        <v-carousel-item
-          v-for="(banner, i) in banners"
-          :key="i"
-        >
-            <v-row
-              class="fill-height"
-              align="center"
-              justify="center"
-            >
-              <img class="banner-image" :src="banner.image" />
-            </v-row>
-        </v-carousel-item>
-      </v-carousel>
-  </section>
-  <div class="content">
-    <h1>ХИТ ПРОДАЖ</h1>
-    <section  class="products">
-      <card-product v-for="(product, i) in 3" :key="i" />
-    </section>
-  </div>
+    <preview />
+    <about />
+    <collections v-if="banners.length > 0" :banners="banners" />
   </div>
 </template>
 
 <script>
 
 import AppLoading from "@/components/AppLoading"
-import CardProduct from "@/components/CardProduct"
+import Preview from "@/components/Main/Preview"
+import About from "@/components/Main/About"
+import Collections from "@/components/Main/Collections"
+
 export default {
-  asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
+  asyncData({store}) {
     store.dispatch('banners/getAllBanners')
   },
   components: {
     AppLoading,
-    CardProduct
+    Preview,
+    About,
+    Collections
   },
   computed: {
     banners() {
       return this.$store.state.banners.banners
-    }
+    },
   },
-   data: () => ({
-      model: 0,
-      colors: [
-        'primary',
-        'secondary',
-        'yellow darken-2',
-        'red',
-        'orange',
-      ],
-    })
 }
 </script>
 <style scoped lang="scss">
+ 
+  .v-window__next {
+    background: rgb(255 255 255 / 76%);
+  }
   .page {
     width: 100%;
     height: 100%;
@@ -75,22 +50,46 @@ export default {
   .banner-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-  }
-  .products {
-    margin: 0 auto;
-    padding: 60px 0;
-    max-width: calc(100% - 120px);
-    height: 100%;
-    display: grid; 
-    grid-template-columns: 1fr 1fr 1fr; 
-    gap: 20px 20px; 
+    object-fit: fill;
   }
   .content {
-    max-width: calc(100% - 120px);
     width: 100%;
     height: 100%;
+    padding-top: 60px;
     margin: 0 auto;
     min-height: 700px;
+    display: flex; 
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    .wrapper {
+      width: 100%;
+      height: 100%;
+      max-width: calc(100% - 10%);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      &__products {
+        padding: 60px 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between; 
+      }
+      
+      &__title {
+        // font-family: 'Montserrat-Bold', 'sans-serif';
+        width: 100%;
+        text-align: left;
+        font-size: 42px;
+      }
+    }
+  }
+  .v-image {
+    height: 800px;
   }
 </style>

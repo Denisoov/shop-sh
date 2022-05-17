@@ -1,8 +1,6 @@
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
-  loading: '~/components/AppLoading.vue',
-  // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - clothing-store',
     title: 'clothing-store',
@@ -21,11 +19,13 @@ export default {
   },
 
   css: [
-    '~/assets/index.scss'],
+    '~/assets/index.scss',
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/axios-init',
+    '@plugins/mask.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

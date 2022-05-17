@@ -26,3 +26,11 @@ export default {
     />
   </svg>
 </template>
+
+<style>
+  svg {
+    font-size: 30px !important;
+    height: 30px !important;
+    width: 30px !important;
+  }
+</style>

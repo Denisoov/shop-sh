@@ -37,6 +37,8 @@ export default {
 <style scoped lang="scss">
 .page {
   width: 100%;
+  max-width: calc(100% - 10%);
+  margin: 0 auto;
   height: 100%;
   min-height: 100vh;
   background-image: url("../assets/DRESSCODE.png");
@@ -44,7 +46,6 @@ export default {
   background-size: 50%;
   background-position: center center;
   background-attachment: scroll;
-  padding: 6px calc((100% - 92%) / 2);
 }
 .wrapper {
   padding-top: 70px;
