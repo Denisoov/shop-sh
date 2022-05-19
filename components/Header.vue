@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="header__body">
-        <span class="header__logotype">shop</span>
+        <img class="header__logotype" src="@/static/v.png" alt="логотип">
         <nav class="header__links">
           <nuxt-link 
             class="header__links-link" 
@@ -13,6 +13,11 @@
             data-item='Каталог' 
             to="/catalog"
           >Каталог</nuxt-link>
+          <nuxt-link 
+            class="header__links-link" 
+            data-item='Наши' 
+            to="/catalog"
+          >Наши работы</nuxt-link>
           <nuxt-link 
             class="header__links-link" 
             to="/contacts"
@@ -45,7 +50,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    padding: 20px 10px;
+    padding: 15px 10px 15px 10px;
     background: #041A31;
   }
 
@@ -86,10 +91,10 @@ export default {
   }
 
   &__logotype {
+    width: 42px;
+    height: 42px;
+    object-fit: fill;
     margin-left: 30px;
-    font-size: 28px;
-    font-family:'Montserrat-Bold', 'sans-serif';
-    color: #545B75;
   }
 
   &__basket {

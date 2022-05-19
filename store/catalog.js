@@ -1,5 +1,6 @@
 const defaultState = {
     catalog: [],
+    detailProduct: {}
   };
   
   export const state = () => defaultState;
@@ -8,6 +9,9 @@ const defaultState = {
     SET_CATALOG(state, catalog) {
       state.catalog = catalog;
     },
+    SET_DETAIL_PRODUCT(state, detailProduct) {
+      state.detailProduct = detailProduct
+    }
   };
   
   export const actions = {
@@ -28,6 +32,28 @@ const defaultState = {
           typeLoading: 'isLoadingCatalogPage',
           status: false
       }, { root: true })
+    },
+
+    async getDetailProduct({ commit }, idProduct) {
+      try {
+        await commit(
+          'SET_LOADING', {
+            typeLoading: 'isLoadingCatalogPage',
+            status: true
+        }, { root: true })
+
+        const { data } = await this.$api.get(`product/showDetail/${idProduct}`)
+
+        commit('SET_DETAIL_PRODUCT', data)
+
+        await commit(
+          'SET_LOADING', {
+            typeLoading: 'isLoadingCatalogPage',
+            status: false
+        }, { root: true })
+      } catch (error) {
+        
+      }
     }
   };
   

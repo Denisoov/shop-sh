@@ -1,6 +1,11 @@
 <script>
 export default {
-  props: ['catalogs']
+  props: ['catalogs'],
+  methods: {
+    goDetailProduct(id) {
+      this.$router.push(`catalog/${id}`)
+    }
+  },
 }
 </script>
 
@@ -20,7 +25,7 @@ export default {
             <div class="product__image">
               <img :src="`data:image/png;base64, ${product.images[0].image}`" alt="Футболка">
             </div>
-            <div class="product__description">
+            <div @click="goDetailProduct(product.id)" class="product__description">
               <h3 class="product__title">{{ product.name }}</h3>
               <div class="product__container">
                 <p class="product__gender">Артикул: {{ product.article }}</p>
@@ -71,6 +76,8 @@ export default {
     background: white;
   
     &__description {
+      cursor: pointer;
+      width: 100%;
       padding: 30px;
     }
 

@@ -19,7 +19,7 @@ export default {
           width="900" 
           height="450" 
           :autoplay="true"
-          autoplayTimeout="5000"
+          :autoplayTimeout="5000"
         >
           <slide 
             v-for="(banner, index) in banners" 

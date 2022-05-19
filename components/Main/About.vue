@@ -69,7 +69,7 @@
     width: 400px;
     height: 400px;
     border-radius: 8px;
-    background: url("@/assets/hello.png") no-repeat top;
+    background:  url("@/assets/hello.png") no-repeat top;
     background-size: contain;
   }
 }
