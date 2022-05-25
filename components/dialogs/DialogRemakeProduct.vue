@@ -37,6 +37,7 @@ export default {
     this.getProductForRemake()
   },
   methods: {
+    // при загрузке получаем все данные о продукте
     async getProductForRemake() {
       try {
         const { data } = await this.$api.get(`product/showDetail/${this.remakeProduct.idProduct}`)
@@ -44,15 +45,7 @@ export default {
 
       } catch (error) {}
     },
-    async createNewCollection() {
-      await this.$store.dispatch("admin/createNewProduct", {
-        formData: this.product,
-        idCollection: this.$route.params.admCollections,
-      });
-
-      await this.$emit("closeDialog");
-    },
-
+    // удаление параметров продукта
     async deleteParamsOfProduct(idParameter) {
       await this.$api.delete(`parameter/delete/${idParameter}`)
       await this.getProductForRemake()
@@ -68,6 +61,7 @@ export default {
         
       }
     },
+    // загружаем картинку и отправляем 
      onChangeImage(image) {
        if (image !== null) {
           let reader = new FileReader()
@@ -83,7 +77,7 @@ export default {
           }
        }
     },
-
+    // добавляем новый размер
     async addSizeInProduct() {
       const params = { in_stock: true, size:"XS"}
 
@@ -92,6 +86,7 @@ export default {
       await this.$api.post(`parameter/create/${this.remakeProduct.idProduct}`, params)
       await this.getProductForRemake()
     },
+    // обновляем данные продукта
     async updateProduct() {
       try {
         await this.$api.patch(`product/update/${this.product.id}`, this.product)

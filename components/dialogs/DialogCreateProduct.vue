@@ -33,7 +33,8 @@ export default {
     PictureInput
   },
   methods: {
-    async createNewCollection() {
+    // создаем новый продукт
+    async createNewProduct() {
       await this.$store.dispatch("admin/createNewProduct", {
         formData: this.product,
         idCollection: this.$route.params.admCollections
@@ -43,6 +44,7 @@ export default {
 
       this.titleCollection = null;
     },
+    // следим за изменением картинки
     onChangeImage (image) {
       if (image) this.product.image = image
     },
@@ -126,7 +128,7 @@ export default {
     <div class="control">
       <v-btn
         :disabled="!valid"
-        @click="createNewCollection"
+        @click="createNewProduct"
         class="btn-add"
         color="deep-purple accent-4"
         >Добавить

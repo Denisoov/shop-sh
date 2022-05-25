@@ -7,9 +7,11 @@ export default {
     PictureInput
   },
   methods: {
+    // следим за изменением поля загрузки картинки
     onChangeImage (image) {
       if (image) this.image = image
     },
+    // отправляем картинку
     async loadNewBanner() {
       await this.$store.dispatch('admin/loadNewBanner', {
         image: this.image

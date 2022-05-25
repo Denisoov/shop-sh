@@ -66,6 +66,7 @@
 <script>
 
 export default {
+  // запрашиваем все баннеры
   asyncData({$cookies, store, redirect}) {
     if ($cookies.get('jwt_token')) {
       store.commit('admin/SET_JWT_TOKEN', $cookies.get('jwt_token'))
@@ -90,6 +91,7 @@ export default {
     openDialogCreateBanner() {
       this.isDialogCreateBanner = true
     },
+    // удаляем баннер
     async deleteBanner(idBanner) {
       await this.$store.dispatch('admin/deleteBanner', idBanner)
     }

@@ -56,9 +56,11 @@ export default {
     ],
   }),
   methods: {
+    // переход на вкладку в админке
     goRouteTab(slug) {
       this.$router.push(`${slug}`)
     },
+    // выход из админки
     exit() {
       this.$store.dispatch('admin/exit')
 

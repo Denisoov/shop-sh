@@ -41,10 +41,12 @@
       closeDialogRemakeProduct() {
         this.isDialogRemakeProduct = false;
       },
+      // открытие диалогового окна для продукта
       openDialogRemakeProduct(product) {
         this.$store.commit('admin/SET_REMAKE_PRODUCT', product)  
         this.isDialogRemakeProduct = true;
       },
+      // удаление продукта
       deleteItem (item) {
         this.$store.dispatch(
           'admin/deleteProduct', { 

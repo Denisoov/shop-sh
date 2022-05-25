@@ -55,6 +55,7 @@
 <script>
 
 export default {
+  // получение списка коллекций ( тип продуктов)
   asyncData({ redirect, $cookies, store }) {
     if ($cookies.get("jwt_token")) {
       store.commit("admin/SET_JWT_TOKEN", $cookies.get("jwt_token"));
@@ -77,6 +78,7 @@ export default {
     isDialogCreateCollection: false,
   }),
   methods: {
+    // переход на страницу выбранной коллекции
     goToDetailCategory(idCollection) {
       this.$router.push(`/admin/adm-collections/${idCollection}`)
     },
@@ -86,6 +88,7 @@ export default {
     openDialogCreateCollection() {
       this.isDialogCreateCollection = true;
     },
+    // удаление выбранной коллекции
     deleteCollections(idCollection) {
       this.$store.dispatch('admin/deleteCollections', idCollection)
     }

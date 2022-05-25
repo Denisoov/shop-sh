@@ -26,6 +26,7 @@ const defaultState = {
   };
   
   export const actions = {
+  // получение каталога
     async getAllCatalog({ commit }) {
       await commit(
         'SET_LOADING', {
@@ -45,6 +46,7 @@ const defaultState = {
       }, { root: true })
     },
 
+  // получение детальной информации о продукте
     async getDetailProduct({ commit, dispatch }, idProduct) {
       try {
         await commit(
@@ -67,6 +69,8 @@ const defaultState = {
         
       }
     },
+
+    // получение рекомендованных продуктов
     async getRecommendationProducts({ commit }, idProduct) {
       try {
         const { data } = await this.$api.get(`product/showGroupByProduct/${idProduct}`)
@@ -77,6 +81,7 @@ const defaultState = {
   };
   
   export const getters = {
+    // фильтрация
     filterCatalog: (state) => {
       if (state.filter.id === 'all') {
         let result = []

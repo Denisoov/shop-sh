@@ -1,7 +1,9 @@
 <script>
-import { get } from 'http'
-
 export default {
+  components: {
+    AppDialog: () => (import('@/components/base/AppDialog')),
+    DialogBuyProduct: () => (import('@/components/dialogs/DialogBuyProduct')),
+  },
   asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
     store.dispatch('catalog/getDetailProduct', route.params.catalog)
   },
@@ -19,8 +21,15 @@ export default {
   data: () => ({
     countSize: 1,
     model: null,
+    isDialogBuyProduct: false
   }),
   methods: {
+    closeDialogBuy() {
+      this.isDialogBuyProduct = false
+    },
+    openDialogBuy() {
+      this.isDialogBuyProduct = true
+    },
     minusCount() {
       if (this.countSize > 1) {
         this.countSize--
@@ -31,6 +40,7 @@ export default {
         this.countSize++
       } 
     },
+    // переход на страницу продукта
     goDetailProduct(id) {
       this.$router.push(`${id}`)
     }
@@ -93,6 +103,7 @@ export default {
           <div class="params__control">
             <v-btn
               color="primary"
+              @click="openDialogBuy"
               class="mt-5"
             >
               Заказать
@@ -101,7 +112,7 @@ export default {
         </section>
       </div>
       <section v-if="recommendationProducts.length > 0" class="recommendation">
-        <h1 class="recommendation__title">С этим товаром покупали</h1>
+        <h1 class="recommendation__title">Мы рекомендуем</h1>
         <v-slide-group
           v-model="model"
           class="pa-4"
@@ -126,6 +137,22 @@ export default {
         </v-slide-group>
       </section>
     </div>
+    <app-dialog
+      v-if="isDialogBuyProduct"
+      ref="dialog"
+      :max-width="500"
+      :value="isDialogBuyProduct"
+      v-bind="$attrs"
+      v-on="$listeners"
+      @input="closeDialogBuy"
+    >
+      <template #content>
+        <dialog-buy-product
+          v-click-outside="closeDialogBuy"
+          @closeDialog="closeDialogBuy" 
+        />
+      </template>
+    </app-dialog>
   </div>
 </template>
 

@@ -6,6 +6,7 @@ export default {
     }
   },
   methods: {
+    // переходим на страницу продукта
     goDetailProduct(id) {
       this.$router.push(`catalog/${id}`)
     }

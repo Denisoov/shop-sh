@@ -12,6 +12,7 @@
 import SignInAdmin from '@/components/SignInAdmin'
 
 export default {
+  // проверка на наличие JWT-токена для авторизации
   asyncData({$cookies, store}) {
     if ($cookies.get('jwt_token')) {
       store.commit('admin/SET_JWT_TOKEN', $cookies.get('jwt_token'))

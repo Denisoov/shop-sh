@@ -3,6 +3,7 @@
 export default {
   data: () => ({ titleCollection: null }),
   methods: {
+    // создаем новую коллекцию (тип одежды)
     async createNewCollection() {
       await this.$store.dispatch("admin/createNewCollection", {
         name: this.titleCollection,

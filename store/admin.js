@@ -31,6 +31,7 @@ const defaultState = {
   }
   
   export const actions = {
+    // авторизация в админку
     async signIn({ commit }, dataForm) {
       try {
         const { data } = await this.$api.post('getToken', dataForm)
@@ -43,6 +44,7 @@ const defaultState = {
       }
     },
     
+    // выход из админки
     exit() {
       try {
         this.$api.delete('user/dropToken')
@@ -52,6 +54,8 @@ const defaultState = {
         console.log(error)
       }
     },
+
+    // Получение всех баннеров
     async getAllBanners({ commit }) {
       try {
         
@@ -64,6 +68,7 @@ const defaultState = {
       }
     },
 
+    // Добавление нового баннера
     async loadNewBanner({ dispatch }, image) {
       try {
         await this.$api.post('banner/create', image)
@@ -73,6 +78,7 @@ const defaultState = {
       }
     },
 
+    // Удаление выбранного банера
     async deleteBanner({ dispatch }, idBanner) {
       try {
         await this.$api.delete(`banner/delete/${idBanner}`)
@@ -83,6 +89,7 @@ const defaultState = {
       }
     },
 
+    // Получение всех коллекций
     async getAllCollection({ commit }) {
       try {
         
@@ -95,6 +102,7 @@ const defaultState = {
       }
     },
 
+    // Создание коллекции
     async createNewCollection({ dispatch }, titleCollection) {
       try {
         await this.$api.post('group/create', titleCollection)
@@ -106,6 +114,7 @@ const defaultState = {
       }
     },
 
+    // удаление коллекции
     async deleteCollections({ dispatch }, idCollection) {
       try {
         await this.$api.delete(`group/delete/${idCollection}`)
@@ -116,6 +125,7 @@ const defaultState = {
       }
     },
 
+    // создание нового продукта
     async createNewProduct({ dispatch }, { formData, idCollection }) {
       try {
         await this.$api.post(`product/create/${idCollection}`, formData)
@@ -125,7 +135,7 @@ const defaultState = {
         
       }
     },
-
+    // получаем продукты конкретной коллекции
     async getProductsOfCollection({ commit }, idCollection) {
       try {
         
@@ -137,6 +147,7 @@ const defaultState = {
         console.log(error)
       }
     },
+    // удаляем выбранный продукт
     async deleteProduct({ dispatch }, { idProduct, idCollection}) {
       try {
         await this.$api.delete(`product/delete/${idProduct}`)
@@ -146,16 +157,6 @@ const defaultState = {
         
       }
     },
-
-    async addParamsProduct({ dispatch }, { idProduct, params }) {
-      try {
-        await this.$api.post(`/api/parameter/create/${product}}`, params)
-  
-      } catch (error) {
-        
-      }
-    },
-
   }
   
   

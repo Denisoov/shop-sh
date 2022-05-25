@@ -50,6 +50,7 @@
       ],
     }),
     methods: {
+      // авторизация
       signInAdmin () {
         if (!this.$refs.form.validate()) return
 

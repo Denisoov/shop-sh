@@ -3,6 +3,7 @@
 import CatalogProducts from '@/components/CatalogProducts'
 
 export default {
+  // получение каталога товаров
   asyncData({store}) {
     store.dispatch('catalog/getAllCatalog')
   },

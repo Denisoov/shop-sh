@@ -11,6 +11,7 @@ export const mutations = {
 };
 
 export const actions = {
+  // получение всех баннеров 
   async getAllBanners({ commit }) {
     await commit(
       'SET_LOADING', {

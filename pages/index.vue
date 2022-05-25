@@ -14,6 +14,7 @@ import About from "@/components/Main/About"
 import Collections from "@/components/Main/Collections"
 
 export default {
+  // получение всех баннеров
   asyncData({store}) {
     store.dispatch('banners/getAllBanners')
   },
