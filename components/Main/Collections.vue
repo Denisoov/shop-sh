@@ -19,7 +19,7 @@ export default {
           width="900" 
           height="450" 
           :autoplay="true"
-          :autoplayTimeout="5000"
+          :autoplayTimeout="3000"
         >
           <slide 
             v-for="(banner, index) in banners" 
@@ -28,12 +28,11 @@ export default {
           >
             <img 
               class="present__image"
-              :src="`data:image/png;base64, ${banner.image}`" 
+              :src="banner.image" 
               alt="Изображение"
             >
           </slide>
         </carousel-3d>
-    
     </div>
   </section>
 </template>

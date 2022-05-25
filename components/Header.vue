@@ -15,11 +15,6 @@
           >Каталог</nuxt-link>
           <nuxt-link 
             class="header__links-link" 
-            data-item='Наши' 
-            to="/catalog"
-          >Наши работы</nuxt-link>
-          <nuxt-link 
-            class="header__links-link" 
             to="/contacts"
             data-item='Контакты' 
           >Контакты</nuxt-link>

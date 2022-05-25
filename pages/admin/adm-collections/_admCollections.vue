@@ -22,7 +22,6 @@
         { text: 'Наименование', align: 'start', sortable: false, value: 'name',},
         { text: 'Артикул', value: 'article', sortable: false, },
         { text: 'Размеры', value: 'parameters', sortable: false, },
-        // { text: 'В наличии', align: 'start', sortable: false, value: 'in_stock',},
         { text: 'Цена', value: 'price', sortable: false,},
         { text: 'Действия', value: 'actions', sortable: false,},
       ],
@@ -96,7 +95,7 @@
       <template v-slot:item.images="{ item }">
         <img 
           class="product-image"
-          :src="`data:image/png;base64, ${item.images[0].image}`" 
+          :src="item.images[0].image" 
           alt="Продукт"
         >
       </template>

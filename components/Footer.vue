@@ -15,8 +15,8 @@
 
       <div class="links" >
         <h4 class="links__title">Навигация</h4>
+        <nuxt-link class="links__link" to="/">Главная</nuxt-link>
         <nuxt-link class="links__link" to="/catalog">Каталог</nuxt-link>
-        <nuxt-link class="links__link" to="/works">Наши работы</nuxt-link>
         <nuxt-link class="links__link" to="/contacts">Контакты</nuxt-link>
       </div>
     </div>

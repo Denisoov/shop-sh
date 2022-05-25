@@ -1,6 +1,10 @@
 <script>
 export default {
-  props: ['catalogs'],
+  props: {
+    catalog: {
+      type: Array,
+    }
+  },
   methods: {
     goDetailProduct(id) {
       this.$router.push(`catalog/${id}`)
@@ -11,21 +15,21 @@ export default {
 
 <template>
   <div>
-    <div v-for="(catalog, index) in catalogs" class="wrapper-catalog">
+    <div class="wrapper-catalog">
       <section 
         class="catalog"
         >
-        <h3 class="catalog__title" >{{ catalog.name }}</h3>
-        <section v-if="catalog.products.length >= 0" class="products">
+        <section v-if="catalog.length >= 0" class="products">
           <article 
-            v-for="(product, index) in catalog.products" 
+            v-for="(product, index) in catalog" 
             :key="index" 
+            @click="goDetailProduct(product.id)"
             class="product" 
           >
             <div class="product__image">
-              <img :src="`data:image/png;base64, ${product.images[0].image}`" alt="Футболка">
+              <img :src="product.images[0].image" alt="Футболка">
             </div>
-            <div @click="goDetailProduct(product.id)" class="product__description">
+            <div class="product__description">
               <h3 class="product__title">{{ product.name }}</h3>
               <div class="product__container">
                 <p class="product__gender">Артикул: {{ product.article }}</p>

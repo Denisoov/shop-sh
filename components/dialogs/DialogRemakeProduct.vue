@@ -10,10 +10,11 @@ export default {
       article: null,
       size: null,
       in_stock: false,
-      image: null,
+      images: null,
       parameters: []
     },
     newImage: null,
+    imgsrc: null,
     valid: true,
     nameRules: [
       (v) => !!v || "*Обязательное поле",
@@ -40,6 +41,7 @@ export default {
       try {
         const { data } = await this.$api.get(`product/showDetail/${this.remakeProduct.idProduct}`)
         this.product = data
+
       } catch (error) {}
     },
     async createNewCollection() {
@@ -55,9 +57,31 @@ export default {
       await this.$api.delete(`parameter/delete/${idParameter}`)
       await this.getProductForRemake()
     },
+    async removeImage(image) {
+      try {
+        await this.$api.delete(`image/delete/${image.id}`)
 
-    onChangeImage(image) {
-      if (image) this.newImage = image;
+        const { data } = await this.$api.get(`product/showDetail/${image.product_id}`)
+
+        this.product.images = data.images
+      } catch (error) {
+        
+      }
+    },
+     onChangeImage(image) {
+       if (image !== null) {
+          let reader = new FileReader()
+          reader.readAsDataURL(image)
+          reader.onload = (e) => {
+            this.$api.post(`image/create/${this.product.id}`, {
+              image: e.target.result
+            })
+
+            this.newImage = null
+
+            this.getProductForRemake()
+          }
+       }
     },
 
     async addSizeInProduct() {
@@ -70,10 +94,6 @@ export default {
     },
     async updateProduct() {
       try {
-       this.newImage
-        ? this.product.images[0].image = this.newImage
-        : this.product.images[0].image = `data:image/png;base64, ${this.product.images[0].image}`
-
         await this.$api.patch(`product/update/${this.product.id}`, this.product)
         await this.$emit('closeDialog', false)
 
@@ -95,31 +115,30 @@ export default {
       <v-form v-model="valid">
         <v-container>
           <v-row>
-            <v-col cols="12" md="6">
+            <v-col cols="12" md="12">
               <div class="images">
-                <img 
+                <div                     
                   v-for="(image, index) in product.images" 
-                  :key="index" 
-                  class="images__image"
-                  :src="`data:image/png;base64, ${image.image}`" 
-                  alt="Продукт"
+                  :key="index"  
+                  class="images__image-box"
                 >
-                <div class="images__description" >заменить на</div>
-                <picture-input
-                  @change="onChangeImage"
-                  ref="pictureInput"
-                  width="100"
-                  height="120"
-                  buttonClass="add-image"
-                  :change="'Изменить'"
-                  accept="image/jpeg,image/png"
-                  size="10"
-                  :custom-strings="{
-                    drag: 'Добавить изображение',
-                  }"
+                  <img 
+                    class="images__image-box-image"
+                    :src="image.image" 
+                    alt="Продукт"
                   >
-                </picture-input>
+                  <div @click="removeImage(image)" class="images__image-box-shell">
+                    <icon-close />
+                  </div>
+                </div>
               </div>
+                <v-file-input
+                  @change="onChangeImage"
+                  v-model="newImage"
+                  class="mt-6"
+                  accept="image/png"
+                 label="Загрузить изображение"
+                 ></v-file-input>
             </v-col>
             <v-col cols="12" md="12">
               <v-text-field
@@ -204,6 +223,17 @@ export default {
 </template>
 
 <style lang="scss">
+.box-file {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .v-input {
+  width: 300px;
+  max-width: 300px;
+}
+}
 .v-input {
   width: 100%;
   max-width: 100%;
@@ -226,23 +256,45 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  flex-wrap: wrap;
 
-  &__image {
-    border: 1px solid #d9d9d9;
-    margin-right: 4px;
-    width: 100px;
-    height: 120px;
-    object-fit: contain;
+  &__image-box {
+      width: 100px;
+      height: 120px;
+      border: 1px solid #6e6e6e;
+
+    &-image {
+      display: block;
+      margin-right: 4px;
+      width: 100px;
+      height: 120px;
+      object-fit: contain;
+    }
+    &-shell {
+      display: none !important;
+      width: 100px;
+      height: 120px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &:hover &-shell {
+      display: flex !important;
+    }
+    &:hover &-image {
+      display: none !important;
+    }
   }
 
-  &__description {
-    height: 120px;
-    width: inherit;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  // &__description {
+  //   height: 120px;
+  //   width: inherit;
+  //   text-align: center;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  // }
 }
 .add-image {
   font-size: 12px;

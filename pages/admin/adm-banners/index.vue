@@ -33,7 +33,7 @@
             <td>
               <img 
                 class="table-image" 
-                :src="`data:image/png;base64, ${banner.image}`"
+                :src="banner.image"
               >
             </td>
             <td>

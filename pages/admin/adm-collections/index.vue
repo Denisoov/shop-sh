@@ -5,7 +5,7 @@
       color="primary"
       @click="openDialogCreateCollection"
     >
-      Создать коллекцию
+      Добавить тип продукции
     </v-btn>
     <section v-if="collections.length > 0" class="collections">
       <article
@@ -14,7 +14,7 @@
         class="collection"
       >
         <h4>
-          Коллекция: 
+          Тип: 
           <span class="collection__title">{{ item.name }}</span>
         </h4>
         <p 
