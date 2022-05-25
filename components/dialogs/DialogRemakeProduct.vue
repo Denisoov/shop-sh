@@ -126,7 +126,7 @@ export default {
                     class="images__image-box-image"
                     :src="image.image" 
                     alt="Продукт"
-                  >
+                  />
                   <div @click="removeImage(image)" class="images__image-box-shell">
                     <icon-close />
                   </div>
@@ -136,7 +136,7 @@ export default {
                   @change="onChangeImage"
                   v-model="newImage"
                   class="mt-6"
-                  accept="image/png"
+                  accept="image/jpg"
                  label="Загрузить изображение"
                  ></v-file-input>
             </v-col>
@@ -259,15 +259,15 @@ export default {
   flex-wrap: wrap;
 
   &__image-box {
-      width: 100px;
-      height: 120px;
+      width: 102px;
+      height: 102px;
       border: 1px solid #6e6e6e;
 
     &-image {
       display: block;
       margin-right: 4px;
       width: 100px;
-      height: 120px;
+      height: 100px;
       object-fit: contain;
     }
     &-shell {

@@ -88,6 +88,8 @@ export default {
     &__image {
       width: 100%;
       height: 460px;
+      object-fit: cover;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -95,16 +97,16 @@ export default {
       transition: all 250ms ease-in-out;
 
       img {
-        width: 305px;
-        height: 260px;
-        object-fit: contain;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
         transition: all 250ms ease-in-out;
         overflow: hidden;
 
       }
     }
     &:hover &__image img {
-        transform: scale(1.4);
+        transform: scale(1.05);
         transition: all 250ms ease-in-out;
     }
     &__title {

@@ -46,7 +46,7 @@ export default {
           <img 
             v-for="(image, index) in detailProduct.images"
             :key="index"
-            :src="detailProduct.images[0].image" 
+            :src="image.image" 
             alt="Продукт"
           >
         </section>
@@ -225,7 +225,7 @@ export default {
       padding: 20px;
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
     }
   } 
 }
@@ -272,7 +272,7 @@ export default {
 
     &__image {
       width: 100%;
-      height: 200px;
+      height: 250px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -280,9 +280,9 @@ export default {
       transition: all 250ms ease-in-out;
 
       img {
-        width: initial;
-        height: 160px;
-        object-fit: contain;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
         transition: all 250ms ease-in-out;
         overflow: hidden;
 
@@ -291,6 +291,7 @@ export default {
     &__title {
       color: #5C627F;
       margin-bottom: 20px;
+      white-space: pre-wrap;
     }
 }
 </style>
