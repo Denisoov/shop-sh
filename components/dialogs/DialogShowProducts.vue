@@ -16,7 +16,7 @@ export default {
     <div v-for="(product, index) in products" :key="index">
       <h3>{{product.name}}</h3>
       <div>Артикул:<strong>{{product.article}}</strong></div>
-      <p>Цена: {{ product.price}}</p>
+      <p>Цена: {{ product.price}} ₽</p>
       <hr style="width: 240px">
     </div>
   </div> 

@@ -80,7 +80,7 @@ export default {
               {{ order.phone }}
             </td>
             <td>
-              {{ order.total }}
+              {{ order.total }} ₽
             </td>
             <td>
               <v-btn @click="openDialogShowProduct(order)">Посмотреть</v-btn>
