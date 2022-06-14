@@ -6,7 +6,8 @@ const defaultState = {
     remakeProduct: {
       idProduct: null,
       idCollection: null
-    }
+    },
+    orders: []
   }
   
   export const state = () => defaultState
@@ -27,6 +28,9 @@ const defaultState = {
     SET_REMAKE_PRODUCT(state, product) {
       state.remakeProduct.idProduct = product.id
       state.remakeProduct.idCollection = product.group_id
+    },
+    SET_ORDERS(state, orders) {
+      state.orders = orders
     }
   }
   
@@ -101,7 +105,18 @@ const defaultState = {
         console.log(error)
       }
     },
+    // Получение всех заказов
+    async getAllOrders({ commit }) {
+      try {
+        
+        const { data } = await this.$api.get('order/show')
 
+        commit('SET_ORDERS', data)
+
+      } catch (error) {
+        console.log(error)
+      }
+    },
     // Создание коллекции
     async createNewCollection({ dispatch }, titleCollection) {
       try {

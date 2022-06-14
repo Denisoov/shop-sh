@@ -4,8 +4,13 @@ import CatalogProducts from '@/components/CatalogProducts'
 
 export default {
   // получение каталога товаров
-  asyncData({store}) {
+  asyncData({store, $cookies}) {
     store.dispatch('catalog/getAllCatalog')
+
+    let basket = $cookies.get('basket')
+
+    if (basket !== undefined) store.commit('basket/INIT_BASKET', basket)
+
   },
   components: {
     CatalogProducts,
@@ -29,10 +34,6 @@ export default {
   data: () => ({
     filters: [],
   }),
-  watch: {
-    filter(val) {
-    }
-  },
   mounted() {
     this.filters = this.catalogs.map(
       (item) => {

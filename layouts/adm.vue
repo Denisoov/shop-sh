@@ -11,6 +11,7 @@
         <nav class="links">
           <nuxt-link to="/admin/adm-banners">Баннеры</nuxt-link>
           <nuxt-link to="/admin/adm-collections">Коллекции</nuxt-link>
+          <nuxt-link to="/admin/orders">Оформленные заказы</nuxt-link>
         </nav>
 
         <v-spacer></v-spacer>
@@ -88,7 +89,7 @@ export default {
     margin-left: 60px;
     display: flex;
     justify-content: space-around;
-    width: 250px;
+    width: 350px;
   }
   .auth {
     display: flex;

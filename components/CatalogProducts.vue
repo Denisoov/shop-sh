@@ -9,7 +9,7 @@ export default {
     // переходим на страницу продукта
     goDetailProduct(id) {
       this.$router.push(`catalog/${id}`)
-    }
+    },
   },
 }
 </script>
@@ -24,15 +24,14 @@ export default {
           <article 
             v-for="(product, index) in catalog" 
             :key="index" 
-            @click="goDetailProduct(product.id)"
             class="product" 
           >
-            <div class="product__image">
+            <div class="product__image" @click="goDetailProduct(product.id)">
               <img :src="product.images[0].image" alt="Футболка">
             </div>
             <div class="product__description">
-              <h3 class="product__title">{{ product.name }}</h3>
-              <div class="product__container">
+              <h3 class="product__title" @click="goDetailProduct(product.id)">{{ product.name }}</h3>
+              <div class="product__container" @click="goDetailProduct(product.id)">
                 <p class="product__gender">Артикул: {{ product.article }}</p>
                 <p class="product__price">{{ `₽ ${product.price}` }}</p>
               </div>
@@ -123,6 +122,12 @@ export default {
       color: #2964af;
       font-family: 'Montserrat-SemiBold', 'sans-serif';
       font-size: 16px;
+    }
+    &__button {
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
     }
 }
 </style>

@@ -3,11 +3,14 @@
     <app-loading v-if="isLoadingMainPage || isLoadingCatalogPage" />
     <div v-else>
       <Header />
+      <app-snackbar />
+
       <div class="layout">
         <Nuxt />
       </div>
       <Footer />
     </div>
+    <widjet-basket v-if="$route.name === 'catalog' || $route.name === 'catalog-catalog'" />
   </v-app>
 </template>
 
@@ -16,12 +19,17 @@
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import AppLoading from "@/components/AppLoading"
+import WidjetBasket from "@/components/WidjetBasket.vue"
+import AppSnackbar from '@/components/base/AppSnackbar'
+
 
 export default {
   components: {
     Header,
     Footer,
-    AppLoading
+    AppLoading,
+    WidjetBasket,
+    AppSnackbar
   },
   computed: {
     isLoadingMainPage() {
@@ -37,6 +45,7 @@ export default {
   .app {
     height: 100%;
     background: #F6F8FA;
+    position: relative;
   }
   .layout {
     min-height: 100vh;

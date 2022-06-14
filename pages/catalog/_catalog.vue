@@ -2,10 +2,13 @@
 export default {
   components: {
     AppDialog: () => (import('@/components/base/AppDialog')),
-    DialogBuyProduct: () => (import('@/components/dialogs/DialogBuyProduct')),
   },
-  asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
+  asyncData({route, store, $cookies}) {
     store.dispatch('catalog/getDetailProduct', route.params.catalog)
+
+    let basket = $cookies.get('basket')
+
+    if (basket !== undefined) store.commit('basket/INIT_BASKET', basket)
   },
   computed: {
     detailProduct() {
@@ -20,29 +23,37 @@ export default {
   },
   data: () => ({
     countSize: 1,
+    select_size: undefined,
     model: null,
-    isDialogBuyProduct: false
   }),
   methods: {
-    closeDialogBuy() {
-      this.isDialogBuyProduct = false
-    },
-    openDialogBuy() {
-      this.isDialogBuyProduct = true
-    },
     minusCount() {
       if (this.countSize > 1) {
         this.countSize--
       } 
     },
     plusCount() {
-      if (this.countSize < 5) {
+      if (this.countSize < 10) {
         this.countSize++
       } 
     },
     // переход на страницу продукта
     goDetailProduct(id) {
       this.$router.push(`${id}`)
+    },
+    addProductInBasket(product) {
+      let item = JSON.parse(JSON.stringify(product))
+
+      delete item.images
+      delete item.parameters
+      
+      item.count = this.countSize
+
+      let size = this.detailProduct.parameters[this.select_size]
+
+      item.size = size.size
+
+      this.$store.commit('basket/ADD_PRODUCT_IN_BASKET', item)
     }
   },
 }
@@ -71,6 +82,7 @@ export default {
             <v-chip-group
               active-class="primary--text"
               column
+              v-model="select_size"
             >
               <v-tooltip                   
                 v-for="(size, index) in detailProduct.parameters"
@@ -102,8 +114,9 @@ export default {
           </section>
           <div class="params__control">
             <v-btn
+              :disabled="select_size === undefined"
               color="primary"
-              @click="openDialogBuy"
+              @click="addProductInBasket(detailProduct)"
               class="mt-5"
             >
               Заказать
@@ -137,22 +150,6 @@ export default {
         </v-slide-group>
       </section>
     </div>
-    <app-dialog
-      v-if="isDialogBuyProduct"
-      ref="dialog"
-      :max-width="500"
-      :value="isDialogBuyProduct"
-      v-bind="$attrs"
-      v-on="$listeners"
-      @input="closeDialogBuy"
-    >
-      <template #content>
-        <dialog-buy-product
-          v-click-outside="closeDialogBuy"
-          @closeDialog="closeDialogBuy" 
-        />
-      </template>
-    </app-dialog>
   </div>
 </template>
 
